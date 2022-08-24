@@ -12,11 +12,21 @@ class Dispatch implements EventFace {
   constructor() {
     this.list = {}
   }
+  /**
+   * 订阅/监听
+   * @param name
+   * @param callback
+   */
   on(name: string, callback: Function) {
     const callbackList: Array<Function> = this.list[name] || []
     callbackList.push(callback)
     this.list[name] = callbackList
   }
+  /**
+   * 发布/注册
+   * @param name
+   * @param args
+   */
   emit(name: string, ...args: Array<any>) {
     // let eventName = this.list[args[0]]
     // let params=Array.prototype.slice.call(arguments,1)
@@ -29,6 +39,11 @@ class Dispatch implements EventFace {
       console.log("该事件未监听")
     }
   }
+  /**
+   * 解除绑定
+   * @param name
+   * @param fn
+   */
   off(name: string, fn: Function) {
     let eventName = this.list[name]
     console.log("eventName", eventName)
@@ -41,6 +56,11 @@ class Dispatch implements EventFace {
       console.log("该事件未监听")
     }
   }
+  /**
+   * 只执行一次
+   * @param name
+   * @param fn
+   */
   once(name: string, fn: Function) {
     let decor = (...args: Array<any>) => {
       fn.apply(this, args)
