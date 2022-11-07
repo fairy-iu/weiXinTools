@@ -56,7 +56,7 @@ class Draw {
           break
         }
         // 字符换行计算
-        let temp1 += arr[i] + separator
+        let temp1 += arr[i] + separator+temp
         if (context.measureText(temp1).width < maxWidth) {
           temp += arr[i] + separator
           // 遍历到最后一位字符
